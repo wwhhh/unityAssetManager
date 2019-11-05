@@ -1,0 +1,9 @@
+﻿Test|0
+GenerateSpriteAtlas|0
+BuildAB|1
+GenerateResList|0
+PackFull|0
+ToCDN|0
+ToCVM|0
+ResVersion|
+Client|4
