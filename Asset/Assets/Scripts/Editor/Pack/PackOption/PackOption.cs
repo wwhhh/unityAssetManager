@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace Pack
 {
-    class FileItem
-    {
-        public string shortPath;
-        public uint size;
-    }
+    //class FileItem
+    //{
+    //    public string shortPath;
+    //    public uint size;
+    //}
 
     public class PackConfig
     {

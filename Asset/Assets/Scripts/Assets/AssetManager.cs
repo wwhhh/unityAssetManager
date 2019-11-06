@@ -1,5 +1,4 @@
-﻿using Framework;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
 namespace Asset
@@ -15,7 +14,6 @@ namespace Asset
         }
 
         public const string RES_PATH = "assets/assetbundle/";
-
 
     }
 }
