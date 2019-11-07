@@ -4,7 +4,7 @@ using UnityEngine;
 public class CommonEditor
 {
 
-    [MenuItem("CommonEditor/复制当前资源路径")]
+    [MenuItem("Assets/复制当前资源路径", priority = 10000)]
     static void CopyPath()
     {
         Object o = Selection.GetFiltered(typeof(Object), SelectionMode.DeepAssets)[0];

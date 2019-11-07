@@ -14,7 +14,7 @@ namespace Asset
         public int countActive { get { return countAll - countInactive; } }
         public int countInactive { get { return m_Stack.Count; } }
     
-        public ObjectPool(UnityAction<T> actionOnGet, UnityAction<T> actionOnRelease)
+        public ObjectPool(UnityAction<T> actionOnGet = null, UnityAction<T> actionOnRelease = null)
         {
             m_ActionOnGet = actionOnGet;
             m_ActionOnRelease = actionOnRelease;

@@ -9,6 +9,8 @@ public class AssetTest : MonoBehaviour
 
     void Start()
     {
+        var assetLoader = AssetManager.LoadAsset<Texture>("assets/game/ui/0texture/creat_bg.png");
+        image.texture = assetLoader.asset;
     }
 
 }
