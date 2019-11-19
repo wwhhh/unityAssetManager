@@ -6,19 +6,10 @@ namespace ActorCore
 {
     public class PhysicsController : IActorController
     {
-        private CharacterController _character;
-        private bool _moving;
-        private Vector3 _dir;
-
-        const float SPEED = 5f;
+        public float SPEED = 6f;
 
         public override void Init(Actor actor)
         {
-            _character = gameObject.AddComponent<CharacterController>();
-            _character.height = 2;
-            _character.radius = 0.5f;
-            _character.center = new Vector3(0, 1, 0);
-
             this.actor = actor;
         }
 
@@ -26,20 +17,15 @@ namespace ActorCore
         {
         }
 
-        private void Update()
+        public void MoveDelta(Vector3 delta)
         {
-            if (_moving) _character.Move(_dir * SPEED);
+            transform.localPosition += delta;
         }
 
-        public void MoveDelta(Vector3 dir)
+        public void MoveDelta(float speed, Vector3 directionXZ)
         {
-            _moving = true;
-            _dir = dir;
-        }
-
-        public void Stop()
-        {
-            _moving = false;
+            Vector3 delta = (directionXZ * speed) * Time.deltaTime;
+            transform.localPosition += delta;
         }
 
     }

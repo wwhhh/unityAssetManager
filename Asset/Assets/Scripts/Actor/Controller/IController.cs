@@ -4,14 +4,16 @@ using UnityEngine;
 
 namespace ActorCore
 {
-    public abstract class IActorController : MonoBehaviour
+    public class IActorController : MonoBehaviour
     {
 
         protected Actor actor;
 
-        public abstract void Init(Actor actor);
+        public virtual void Init(Actor actor) { }
 
-        public abstract void Dispose();
+        public virtual void Update() { }
+
+        public virtual void Dispose() { }
 
     }
 

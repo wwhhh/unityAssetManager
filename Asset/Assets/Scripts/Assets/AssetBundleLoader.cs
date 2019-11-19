@@ -19,9 +19,8 @@ namespace Asset
                     AssetBundle ab = AssetBundleManager.I.Load(Dependencies[i]);
                     _dic_AssetBundles.AddLast(ab);
                 }
-
-                assetBundle = AssetBundleManager.I.Load(inABName);
             }
+            assetBundle = AssetBundleManager.I.Load(inABName);
         }
 
         public void Unload()

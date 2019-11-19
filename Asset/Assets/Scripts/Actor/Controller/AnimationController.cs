@@ -28,7 +28,7 @@ namespace ActorCore
         {
             this.actor = actor;
 
-            _root = "character/animations/clips/";
+            _root = "assets/game/character/" + actor.actorName + "/animations/clips/";
             _animator = GetComponentInChildren<Animator>();
 
             CreateAnimGraph();
@@ -73,10 +73,11 @@ namespace ActorCore
             PlayableInfo info;
             if (!_cachedAssetLoaders.TryGetValue(name, out info))
             {
-                info.loader = AssetManager.LoadAsset<AnimationClip>(_root + name/* + ".anim"*/);
+                string path = _root + name + ".anim";
+                info.loader = AssetManager.LoadAsset<AnimationClip>(path);
                 if (!info.loader.asset)
                 {
-                    Debug.LogError(_root + name + ".anim not found");
+                    Debug.LogError(path + " not found");
                     return -1;
                 }
                 info.input = _mixer.GetBehaviour().AddClipPlayable(AnimationClipPlayable.Create(_playableGraph, info.loader.asset));
@@ -84,6 +85,16 @@ namespace ActorCore
             }
             return info.input;
         }
+
+        #region 动画位移
+
+        private void OnAnimatorMove()
+        {
+            Vector3 delta = _animator.deltaPosition;
+            actor.physicsController.MoveDelta(delta);
+        }
+
+        #endregion
 
         #region 外部
 
@@ -98,6 +109,19 @@ namespace ActorCore
 
             int input = GetAnimationClip(name);
             _mixer.GetBehaviour().PlayClip(input, blendTime);
+        }
+
+        public bool IsFinished()
+        {
+            if (_animator == null)
+                return true;
+
+            AnimationClipPlayable curPlayable = (AnimationClipPlayable)_mixer.GetBehaviour().GetCurrentPlayable();
+            if (!curPlayable.IsNull() && curPlayable.IsValid())
+            {
+                return curPlayable.IsDone();
+            }
+            return false;
         }
 
         #endregion

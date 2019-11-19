@@ -9,6 +9,8 @@ namespace ActorCore
     public class AvatarController : IActorController
     {
 
+        public Transform body;
+
         public override void Dispose()
         {
         }
@@ -22,8 +24,14 @@ namespace ActorCore
         private void LoadAvatar()
         {
             var asset = AssetManager.LoadAsset<GameObject>("assets/game/character/test/"+actor.actorName+".prefab");
-            Instantiate(asset.asset);
+            if (asset.asset == null) return;
+
+            GameObject go = Instantiate(asset.asset);
+            body = go.transform;
+            body.SetParent(transform);
             asset.Unload();
+
+            actor.PostInit();
         }
 
     }

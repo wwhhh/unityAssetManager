@@ -21,6 +21,7 @@ namespace Asset
 
         public override void Init()
         {
+            InitPath();
             AssetBundle ab = AssetBundle.LoadFromFile(GetABPath("AB"));
             if (ab != null)
             {
@@ -113,7 +114,7 @@ namespace Asset
             return _assetBundleManifest.GetAllDependencies(InAssetBundleName);
         }
 
-        private string GetABPath(string v)
+        private void InitPath()
         {
 #if UNITY_EDITOR
             _rootPath = "Res/Win/";
@@ -125,8 +126,18 @@ namespace Asset
             }
 #endif
             Debug.Log(string.Format("AssetBundleManager:        _rootPath[{0}]", _rootPath));
-
-            return _rootPath + v;
         }
-    }
+
+        private string GetABPath(string abName)
+        {
+#if UNITY_EDITOR
+        AllLoaded.Add(abName);
+#endif
+            return _rootPath + abName;
+        }
+
+#if UNITY_EDITOR
+    public static HashSet<string> AllLoaded = new HashSet<string>();
+#endif
+}
 }

@@ -1,16 +1,13 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using Asset;
 
 public class AssetTest : MonoBehaviour
 {
 
-    public RawImage image;
-
     void Start()
     {
-        var assetLoader = AssetManager.LoadAsset<Texture>("assets/game/ui/0texture/creat_bg.png");
-        image.texture = assetLoader.asset;
+        var assetLoader = AssetManager.LoadAsset<GameObject>("assets/game/character/lancem2/lancem2@skin.prefab");
+        GameObject go = Instantiate(assetLoader.asset);
     }
 
 }
